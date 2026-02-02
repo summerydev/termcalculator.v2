@@ -127,13 +127,14 @@ export default function Home() {
     if (!isNaN(newDate.getTime())) setSelectedDate(newDate);
   };
 
-  const toInputValue = (date) => {
-    // 로컬 날짜 기준으로 YYYY-MM-DD 만들기
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, "0");
-    const d = String(date.getDate()).padStart(2, "0");
-    return `${y}-${m}-${d}`;
-  };
+const toInputValue = (date: Date): string => {
+  // 로컬 날짜 기준으로 YYYY-MM-DD 만들기
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+};
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
