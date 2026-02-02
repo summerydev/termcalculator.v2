@@ -2,8 +2,11 @@
 
 import { useMemo, useState } from "react";
 
+type HolidayString = `${number}/${number}/${number}`; // "YYYY/MM/DD" 형태(느슨하게)
+type DateInputString = `${number}-${number}-${number}`; // "YYYY-MM-DD" 형태(느슨하게)
+
 export default function Home() {
-  const holidays = useMemo(
+  const holidays = useMemo<readonly HolidayString[]>(
     () => [
       "2024/01/01",
       "2024/02/09",
@@ -61,23 +64,23 @@ export default function Home() {
     [],
   );
 
-  const clearTime = (date) =>
+  const clearTime = (date: Date): Date =>
     new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-  const isSunday = (date) => date.getDay() === 0;
+  const isSunday = (date: Date): boolean => date.getDay() === 0;
 
-  const addDays = (date, days) => {
+  const addDays = (date: Date, days: number): Date => {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
   };
 
-  const isHoliday = (date) => {
+  const isHoliday = (date: Date): boolean => {
     const t = clearTime(date).getTime();
     return holidays.some((h) => clearTime(new Date(h)).getTime() === t);
   };
 
-  const countHolidaysInRange = (startDate, endDate) => {
+  const countHolidaysInRange = (startDate: Date, endDate: Date): number => {
     const start = clearTime(startDate).getTime();
     const end = clearTime(endDate).getTime();
 
@@ -90,7 +93,7 @@ export default function Home() {
   };
 
   // ✅ 순수 계산 함수 (hooks 없음)
-  const calculateTerm = (startDate) => {
+  const calculateTerm = (startDate: Date): Date => {
     let resultDate = addDays(startDate, 84);
 
     // start ~ (start+84) 사이 휴일 수만큼 추가
@@ -109,32 +112,31 @@ export default function Home() {
     return resultDate;
   };
 
-  const [selectedDate, setSelectedDate] = useState(() => new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
 
-  const calculatedDate = useMemo(
+  const calculatedDate = useMemo<Date>(
     () => calculateTerm(selectedDate),
     [selectedDate],
   );
 
-  const handleDateChange = (e) => {
-    const value = e.target.value; // "YYYY-MM-DD"
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value as DateInputString; // "YYYY-MM-DD"
     if (!value) return;
 
     // date input은 로컬 기준으로 해석되게 생성
     const [y, m, d] = value.split("-").map(Number);
     const newDate = new Date(y, m - 1, d);
 
-    if (!isNaN(newDate.getTime())) setSelectedDate(newDate);
+    if (!Number.isNaN(newDate.getTime())) setSelectedDate(newDate);
   };
 
-const toInputValue = (date: Date): string => {
-  // 로컬 날짜 기준으로 YYYY-MM-DD 만들기
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
-};
-
+  const toInputValue = (date: Date): string => {
+    // 로컬 날짜 기준으로 YYYY-MM-DD 만들기
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
