@@ -142,6 +142,7 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-white px-16 py-32 dark:bg-black sm:items-start">
         <div className="w-full">
+          <h2>Term Calculator V2 😇</h2>
           <h3 className="mb-2">Select a date:</h3>
           <input
             type="date"
