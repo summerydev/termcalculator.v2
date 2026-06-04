@@ -169,10 +169,34 @@ export default function Home() {
 
           <div className="mt-8">
             <h3 className="mb-2">Closed</h3>
+
             <ul className="list-disc pl-5">
-              {holidays.map((holiday) => (
-                <li key={holiday}>{holiday}</li>
-              ))}
+              {[...holidays].reverse().map((holiday) => {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                const holidayDate = new Date(holiday);
+                holidayDate.setHours(0, 0, 0, 0);
+
+                const diffTime = holidayDate.getTime() - today.getTime();
+                const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+                const isPast = diffDays < 0;
+                const isUpcomingSoon = diffDays >= 0 && diffDays <= 7;
+
+                const className = isPast
+                  ? "line-through text-gray-400"
+                  : isUpcomingSoon
+                    ? "rounded-md bg-amber-100 px-2 py-1 font-semibold text-amber-900 dark:bg-amber-300 dark:text-amber-950"
+                    : undefined;
+
+                return (
+                  <li key={holiday} className={className}>
+                    {isUpcomingSoon && <span className="mr-1">💖</span>}
+                    {holiday}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
