@@ -6,6 +6,18 @@ type HolidayString = `${number}/${number}/${number}`; // "YYYY/MM/DD" 형태(느
 type DateInputString = `${number}-${number}-${number}`; // "YYYY-MM-DD" 형태(느슨하게)
 
 export default function Home() {
+  type Theme = "dark" | "light" | "pink";
+
+  const [theme, setTheme] = useState<Theme>("dark");
+
+  const toggleTheme = (): void => {
+    const nextTheme: Theme =
+      theme === "dark" ? "pink" : theme === "pink" ? "light" : "dark";
+
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+  };
+
   const holidays = useMemo<readonly HolidayString[]>(
     () => [
       "2024/01/01",
@@ -151,16 +163,24 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-white px-16 py-32 dark:bg-black sm:items-start">
+    <div className="flex min-h-screen items-center justify-center bg-background text-foreground font-sans">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-card px-16 py-32 text-card-foreground sm:items-start">
         <div className="w-full">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="fixed left-1/2 top-1/2 z-50 -translate-y-24 translate-x-16 bg-transparent text-3xl transition hover:scale-110"
+          >
+            {theme === "dark" ? "💗" : theme === "pink" ? "☀️" : "🌙"}
+          </button>
           <h2>Term Calculator V2 😇</h2>
           <h3 className="mb-2">Select a date:</h3>
           <input
             type="date"
             value={toInputValue(selectedDate)}
             onChange={handleDateChange}
-            className="rounded border px-3 py-2"
+            className="rounded border border-border bg-card px-3 py-2 text-card-foreground"
           />
 
           <div className="mt-4">
@@ -185,9 +205,9 @@ export default function Home() {
                 const isUpcomingSoon = diffDays >= 0 && diffDays <= 7;
 
                 const className = isPast
-                  ? "line-through text-gray-400"
+                  ? "line-through text-muted-light"
                   : isUpcomingSoon
-                    ? "rounded-md bg-amber-100 px-2 py-1 font-semibold text-amber-900 dark:bg-amber-300 dark:text-amber-950"
+                    ? "rounded-md bg-soon px-2 py-1 font-semibold text-soon-foreground"
                     : undefined;
 
                 return (

@@ -1,22 +1,87 @@
 @import "tailwindcss";
 
+/* 기본값 */
 :root {
-  --background: #ffffff;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --card-background: #18181b;
+  --card-foreground: #ededed;
+
+  --border: #3f3f46;
+
+  --muted: #a1a1aa;
+  --muted-light: #71717a;
+
+  --soon-background: #fcd34d;
+  --soon-foreground: #451a03;
+}
+
+html[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --card-background: #18181b;
+  --card-foreground: #ededed;
+
+  --border: #3f3f46;
+
+  --muted: #a1a1aa;
+  --muted-light: #71717a;
+
+  --soon-background: #fcd34d;
+  --soon-foreground: #451a03;
+}
+
+html[data-theme="light"] {
+  --background: #f4f4f5;
   --foreground: #171717;
+
+  --card-background: #ffffff;
+  --card-foreground: #171717;
+
+  --border: #d4d4d8;
+
+  --muted: #71717a;
+  --muted-light: #a1a1aa;
+
+  --soon-background: #fef3c7;
+  --soon-foreground: #78350f;
+}
+
+html[data-theme="pink"] {
+  --background: #fbcfe8;
+  --foreground: #4a044e;
+
+  --card-background: #fcf1f9;
+  --card-foreground: #4a044e;
+
+  --border: #f9a8d4;
+
+  --muted: #be185d;
+  --muted-light: #f472b6;
+
+  --soon-background: #ebcffb;
+  --soon-foreground: #831843;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-card: var(--card-background);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-border: var(--border);
+
+  --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
+
+  --color-soon: var(--soon-background);
+  --color-soon-foreground: var(--soon-foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
