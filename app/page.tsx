@@ -6,14 +6,20 @@ type HolidayString = `${number}/${number}/${number}`; // "YYYY/MM/DD" 형태(느
 type DateInputString = `${number}-${number}-${number}`; // "YYYY-MM-DD" 형태(느슨하게)
 
 export default function Home() {
-  type Theme = "dark" | "light" | "pink";
+  const themes = ["light", "dark", "pink", "blue", ] as const;
 
-  const [theme, setTheme] = useState<Theme>("dark");
+  type Theme = (typeof themes)[number];
 
-  const toggleTheme = (): void => {
-    const nextTheme: Theme =
-      theme === "dark" ? "pink" : theme === "pink" ? "light" : "dark";
+  const themeIcons: Record<Theme, string> = {
+    light: "☀️",
+    dark: "🌙",
+    pink: "💗",
+    blue: "🌊",
+  };
 
+  const [theme, setTheme] = useState<Theme>("pink");
+
+  const changeTheme = (nextTheme: Theme): void => {
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
   };
@@ -166,14 +172,21 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center bg-background text-foreground font-sans">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-card px-16 py-32 text-card-foreground sm:items-start">
         <div className="w-full">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="fixed left-1/2 top-1/2 z-50 -translate-y-24 translate-x-16 bg-transparent text-3xl transition hover:scale-110"
-          >
-            {theme === "dark" ? "💗" : theme === "pink" ? "☀️" : "🌙"}
-          </button>
+          <div className="fixed left-1/2 top-1/2 z-50 flex -translate-y-24 translate-x-16 gap-3">
+            {themes.map((themeName) => (
+              <button
+                key={themeName}
+                type="button"
+                onClick={() => changeTheme(themeName)}
+                aria-label={`Change theme to ${themeName}`}
+                className={`border-none bg-transparent p-0 text-3xl transition hover:scale-110 ${
+                  theme === themeName ? "scale-125" : "opacity-50"
+                }`}
+              >
+                {themeIcons[themeName]}
+              </button>
+            ))}
+          </div>
           <h2>Term Calculator V2 😇</h2>
           <h3 className="mb-2">Select a date:</h3>
           <input
