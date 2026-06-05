@@ -17,7 +17,7 @@ export default function Home() {
     blue: "🌊",
   };
 
-  const [theme, setTheme] = useState<Theme>("pink");
+  const [theme, setTheme] = useState<Theme>("blue");
 
   const changeTheme = (nextTheme: Theme): void => {
     setTheme(nextTheme);

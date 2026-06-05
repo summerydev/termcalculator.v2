@@ -2,19 +2,19 @@
 
 /* 기본값 */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #dbeafe;
+  --foreground: #1e3a8a;
 
-  --card-background: #18181b;
-  --card-foreground: #ededed;
+  --card-background: #eff6ff;
+  --card-foreground: #1e3a8a;
 
-  --border: #3f3f46;
+  --border: #bfdbfe;
 
-  --muted: #a1a1aa;
-  --muted-light: #71717a;
+  --muted: #3b82f6;
+  --muted-light: #93c5fd;
 
-  --soon-background: #fcd34d;
-  --soon-foreground: #451a03;
+  --soon-background: #bfdbfe;
+  --soon-foreground: #1e40af;
 }
 html[data-theme="light"] {
   --background: #f4f4f5;
