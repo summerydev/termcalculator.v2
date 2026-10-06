@@ -6,7 +6,7 @@ type HolidayString = `${number}/${number}/${number}`; // "YYYY/MM/DD" 형태(느
 type DateInputString = `${number}-${number}-${number}`; // "YYYY-MM-DD" 형태(느슨하게)
 
 export default function Home() {
-  const themes = ["light", "dark", "pink", "blue", ] as const;
+  const themes = ["light", "dark", "pink", "blue"] as const;
 
   type Theme = (typeof themes)[number];
 
@@ -90,7 +90,10 @@ export default function Home() {
       "2026/10/03",
       "2026/10/05",
       "2026/10/09",
-      "2026/12/25"
+      "2026/12/25",
+      "2026/12/31",
+      "2027/01/01",
+      "2027/01/02",
     ],
     [],
   );
