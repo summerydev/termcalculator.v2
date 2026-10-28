@@ -63,21 +63,23 @@ html[data-theme="pink"] {
   --soon-foreground: #831843;
 }
 
-html[data-theme="blue"] {
-  --background: #dbeafe;
-  --foreground: #1e3a8a;
 
-  --card-background: #eff6ff;
-  --card-foreground: #1e3a8a;
+html[data-theme="halloween"] {
+  --background: #F3E8FF;
+  --foreground: #2D1B45;
 
-  --border: #bfdbfe;
+  --card-background: #FFF7ED;
+  --card-foreground: #2D1B45;
 
-  --muted: #3b82f6;
-  --muted-light: #93c5fd;
+  --border: #D8B4FE;
 
-  --soon-background: #bfdbfe;
-  --soon-foreground: #1e40af;
+  --muted: #EA580C;
+  --muted-light: #FDBA74;
+
+  --soon-background: #FED7AA;
+  --soon-foreground: #9A3412;
 }
+
 
 body {
   background: var(--background);
