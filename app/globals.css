@@ -64,21 +64,23 @@ html[data-theme="pink"] {
 }
 
 
+
 html[data-theme="halloween"] {
-  --background: #F3E8FF;
-  --foreground: #2D1B45;
+  --background: #12091F;
+  --foreground: #FFF4E6;
 
-  --card-background: #FFF7ED;
-  --card-foreground: #2D1B45;
+  --card-background: #241234;
+  --card-foreground: #FFFFFF;
 
-  --border: #D8B4FE;
+  --border: #A020F0;
 
-  --muted: #EA580C;
-  --muted-light: #FDBA74;
+  --muted: #FF6B00;
+  --muted-light: #FFB347;
 
-  --soon-background: #FED7AA;
-  --soon-foreground: #9A3412;
+  --soon-background: #4A1B68;
+  --soon-foreground: #FFB347;
 }
+
 
 
 body {
