@@ -6,7 +6,7 @@ type HolidayString = `${number}/${number}/${number}`; // "YYYY/MM/DD" 형태(느
 type DateInputString = `${number}-${number}-${number}`; // "YYYY-MM-DD" 형태(느슨하게)
 
 export default function Home() {
-  const themes = ["light", "dark", "pink", "halloween"] as const;
+  const themes = ["light", "dark", "pink", "christmas"] as const;
 
   type Theme = (typeof themes)[number];
 
@@ -14,10 +14,10 @@ export default function Home() {
     light: "☀️",
     dark: "🌙",
     pink: "💗",
-    halloween: "🎃",
+    christmas: "🎄",
   };
 
-  const [theme, setTheme] = useState<Theme>("halloween");
+  const [theme, setTheme] = useState<Theme>("christmas");
 
   const changeTheme = (nextTheme: Theme): void => {
     setTheme(nextTheme);

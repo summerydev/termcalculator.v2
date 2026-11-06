@@ -2,19 +2,20 @@
 
 /* 기본값 */
 :root {
-  --background: #12091F;
-  --foreground: #FFF4E6;
+  --background: #0B2218;
+  --foreground: #FFF8EC;
 
-  --card-background: #241234;
+  --card-background: #14392A;
   --card-foreground: #FFFFFF;
 
-  --border: #A020F0;
+  --border: #C8102E;
 
-  --muted: #FF6B00;
-  --muted-light: #FFB347;
+  --muted: #E8B94A;
+  --muted-light: #F6D98B;
 
-  --soon-background: #4A1B68;
-  --soon-foreground: #FFB347;
+  --soon-background: #7A1020;
+  --soon-foreground: #FFE9A8;
+
 }
 html[data-theme="light"] {
   --background: #f4f4f5;
@@ -65,20 +66,20 @@ html[data-theme="pink"] {
 
 
 
-html[data-theme="halloween"] {
-  --background: #12091F;
-  --foreground: #FFF4E6;
+html[data-theme="christmas"] {
+  --background: #0B2218;
+  --foreground: #FFF8EC;
 
-  --card-background: #241234;
+  --card-background: #14392A;
   --card-foreground: #FFFFFF;
 
-  --border: #A020F0;
+  --border: #C8102E;
 
-  --muted: #FF6B00;
-  --muted-light: #FFB347;
+  --muted: #E8B94A;
+  --muted-light: #F6D98B;
 
-  --soon-background: #4A1B68;
-  --soon-foreground: #FFB347;
+  --soon-background: #7A1020;
+  --soon-foreground: #FFE9A8;
 }
 
 
