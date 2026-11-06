@@ -2,21 +2,21 @@
 
 /* 기본값 */
 :root {
-  --background: #0B2218;
-  --foreground: #FFF8EC;
+  --background: #340713;
+  --foreground: #FFF4E6;
 
-  --card-background: #14392A;
+  --card-background: #5C0D20;
   --card-foreground: #FFFFFF;
 
-  --border: #C8102E;
+  --border: #3DBE7A;
 
-  --muted: #E8B94A;
-  --muted-light: #F6D98B;
+  --muted: #5FD497;
+  --muted-light: #E8C25A;
 
-  --soon-background: #7A1020;
-  --soon-foreground: #FFE9A8;
-
+  --soon-background: #14703F;
+  --soon-foreground: #F7DE92;
 }
+
 html[data-theme="light"] {
   --background: #f4f4f5;
   --foreground: #171717;
@@ -32,6 +32,7 @@ html[data-theme="light"] {
   --soon-background: #fef3c7;
   --soon-foreground: #78350f;
 }
+
 html[data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ededed;
@@ -64,30 +65,84 @@ html[data-theme="pink"] {
   --soon-foreground: #831843;
 }
 
-
-
 html[data-theme="christmas"] {
-  --background: #0B2218;
-  --foreground: #FFF8EC;
+  --background: #340713;
+  --foreground: #FFF4E6;
 
-  --card-background: #14392A;
+  --card-background: #5C0D20;
   --card-foreground: #FFFFFF;
 
-  --border: #C8102E;
+  --border: #3DBE7A;
 
-  --muted: #E8B94A;
-  --muted-light: #F6D98B;
+  --muted: #5FD497;
+  --muted-light: #E8C25A;
 
-  --soon-background: #7A1020;
-  --soon-foreground: #FFE9A8;
+  --soon-background: #14703F;
+  --soon-foreground: #F7DE92;
 }
-
-
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== 크리스마스 눈 효과 ===== */
+html[data-theme="christmas"] body::before,
+html[data-theme="christmas"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background-repeat: repeat;
+}
+
+/* 작은 눈송이 (멀리, 느리게) */
+html[data-theme="christmas"] body::before {
+  background-image:
+    radial-gradient(circle 3px at 20px 30px, #fff 40%, transparent 100%),
+    radial-gradient(circle 3px at 90px 150px, #fff 40%, transparent 100%),
+    radial-gradient(circle 3px at 150px 70px, #fff 40%, transparent 100%),
+    radial-gradient(circle 3px at 210px 230px, #fff 40%, transparent 100%),
+    radial-gradient(circle 3px at 260px 110px, #fff 40%, transparent 100%),
+    radial-gradient(circle 3px at 60px 260px, #fff 40%, transparent 100%),
+    radial-gradient(circle 3px at 240px 20px, #fff 40%, transparent 100%),
+    radial-gradient(circle 3px at 180px 160px, #fff 40%, transparent 100%);
+  background-size: 300px 300px;
+  opacity: 0.85;
+  animation: snow-slow 14s linear infinite;
+}
+
+/* 큰 눈송이 (가깝게, 빠르게) */
+html[data-theme="christmas"] body::after {
+  background-image:
+    radial-gradient(circle 5px at 60px 50px, #fff 40%, transparent 100%),
+    radial-gradient(circle 5px at 190px 180px, #fff 40%, transparent 100%),
+    radial-gradient(circle 5px at 320px 90px, #fff 40%, transparent 100%),
+    radial-gradient(circle 5px at 370px 300px, #fff 40%, transparent 100%),
+    radial-gradient(circle 5px at 110px 330px, #fff 40%, transparent 100%),
+    radial-gradient(circle 5px at 250px 260px, #fff 40%, transparent 100%);
+  background-size: 400px 400px;
+  opacity: 1;
+  animation: snow-fast 8s linear infinite;
+}
+
+@keyframes snow-slow {
+  from { background-position: 0 0; }
+  to   { background-position: 0 300px; }
+}
+
+@keyframes snow-fast {
+  from { background-position: 0 0; }
+  to   { background-position: 0 400px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="christmas"] body::before,
+  html[data-theme="christmas"] body::after {
+    animation: none;
+  }
 }
 
 @theme inline {

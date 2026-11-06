@@ -1,28 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-type HolidayString = `${number}/${number}/${number}`; // "YYYY/MM/DD" 형태(느슨하게)
-type DateInputString = `${number}-${number}-${number}`; // "YYYY-MM-DD" 형태(느슨하게)
+type HolidayString = `${number}/${number}/${number}`; 
+type DateInputString = `${number}-${number}-${number}`;
+
+const THEME: "light" | "dark" | "pink" | "christmas" = "christmas";
 
 export default function Home() {
-  const themes = ["light", "dark", "pink", "christmas"] as const;
-
-  type Theme = (typeof themes)[number];
-
-  const themeIcons: Record<Theme, string> = {
-    light: "☀️",
-    dark: "🌙",
-    pink: "💗",
-    christmas: "🎄",
-  };
-
-  const [theme, setTheme] = useState<Theme>("christmas");
-
-  const changeTheme = (nextTheme: Theme): void => {
-    setTheme(nextTheme);
-    document.documentElement.dataset.theme = nextTheme;
-  };
+  useEffect(() => {
+    document.documentElement.dataset.theme = THEME;
+  }, []);
 
   const holidays = useMemo<readonly HolidayString[]>(
     () => [
@@ -176,21 +164,6 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center bg-background text-foreground font-sans">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-card px-16 py-32 text-card-foreground sm:items-start">
         <div className="w-full">
-          <div className="fixed left-1/2 top-1/2 z-50 flex -translate-y-24 translate-x-16 gap-3">
-            {themes.map((themeName) => (
-              <button
-                key={themeName}
-                type="button"
-                onClick={() => changeTheme(themeName)}
-                aria-label={`Change theme to ${themeName}`}
-                className={`border-none bg-transparent p-0 text-3xl transition hover:scale-110 ${
-                  theme === themeName ? "scale-125" : "opacity-50"
-                }`}
-              >
-                {themeIcons[themeName]}
-              </button>
-            ))}
-          </div>
           <h2>Term Calculator V2 😇</h2>
           <h3 className="mb-2">Select a date:</h3>
           <input
