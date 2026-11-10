@@ -119,23 +119,19 @@ export default function Home() {
   };
 
   // ✅ 순수 계산 함수 (hooks 없음)
-  const calculateTerm = (startDate: Date): Date => {
-    let resultDate = addDays(startDate, 84);
+  const calculateTerm = (start: Date): Date => {
+    let end = addDays(start, 84);
+    let counted = countHolidaysInRange(start, end);
 
-    // start ~ (start+84) 사이 휴일 수만큼 추가
-    const holidaysCount = countHolidaysInRange(startDate, resultDate);
-    resultDate = addDays(resultDate, holidaysCount);
-
-    // 일요일이면 다음날
-    if (isSunday(resultDate)) resultDate = addDays(resultDate, 1);
-
-    // 휴일이면 휴일 아닌 날까지 + (중간에 일요일이면 또 +1)
-    while (isHoliday(resultDate)) {
-      resultDate = addDays(resultDate, 1);
-      if (isSunday(resultDate)) resultDate = addDays(resultDate, 1);
+    // 추가된 구간에 새 휴일이 생기면 계속 확장
+    while (counted > 0) {
+      const from = addDays(end, 1);
+      end = addDays(end, counted);
+      counted = countHolidaysInRange(from, end);
     }
 
-    return resultDate;
+    while (isSunday(end) || isHoliday(end)) end = addDays(end, 1);
+    return end;
   };
 
   const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
