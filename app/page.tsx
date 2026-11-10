@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-type HolidayString = `${number}/${number}/${number}`; 
+type HolidayString = `${number}/${number}/${number}`;
 type DateInputString = `${number}-${number}-${number}`;
 
 const THEME: "light" | "dark" | "pink" | "christmas" = "christmas";
@@ -82,6 +82,10 @@ export default function Home() {
       "2026/12/31",
       "2027/01/01",
       "2027/01/02",
+      "2027/02/06",
+      "2027/02/08",
+      "2027/02/09",
+      "2027/03/01",
     ],
     [],
   );
